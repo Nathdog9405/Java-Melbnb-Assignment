@@ -1,16 +1,9 @@
 
 import java.io.*;
 import java.util.*;
-
-
 public class Melbnb {
 
     //Attributes
-    private FileInputStream fis;
-    private ObjectInputStream ois;
-    private FileOutputStream fos;
-    private ObjectOutputStream oos;
-    private List<Property> properties;
     private PropertyDatabase propertyDatabase;
     
 
@@ -29,6 +22,7 @@ public class Melbnb {
         // Storing properties
         List<List<String>> data = new ArrayList<>();
         
+        // Using scanner to read csv file
         try (Scanner scanner = new Scanner(new File(csvFile))) {
 
             // Removes the header line
