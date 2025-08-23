@@ -150,17 +150,17 @@ public class Melbnb {
                 switch (type) {
                     case 1:
                         // Private room
-                        System.out.println("You selected a Private room.");
+                       
                         break;
 
                     case 2:
                         // Entire place
-                        System.out.println("You selected an Entire place.");
+                        
                         break;
 
                     case 3:
                         // Shared room
-                        System.out.println("You selected a Shared room.");
+                        
                         break;
 
                     case 4:
