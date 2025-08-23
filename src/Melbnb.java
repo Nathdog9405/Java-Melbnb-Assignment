@@ -1,5 +1,7 @@
+
 import java.io.*;
 import java.util.*;
+
 
 public class Melbnb {
 
@@ -10,25 +12,47 @@ public class Melbnb {
     private ObjectOutputStream oos;
     private List<Property> properties;
     private PropertyDatabase propertyDatabase;
+    
 
     public Melbnb() {
         // Creating array list for properties
         properties = new ArrayList<Property>();
         propertyDatabase = new PropertyDatabase();
+
     }
 
-    public void populateDatabase(){
-        // Dummy data for now
-        Property [] properties = new Property[]{
-            new Property("Beach House", "Miami", "A beautiful beach house.", 
-            "Entire place", "John Doe", 6, 4.5, 200.0, 20.0, 50.0, 10.0),
-            new Property("City Apartment", "New York", "A cozy apartment in the city center.", 
-            "Private room", "Jane Smith", 2, 4.8, 150.0, 15.0, 30.0, 5.0)
-        };
 
-        for (Property property : properties) {
-            propertyDatabase.addProperty(property);
+    public void populateDatabase(){
+        //Path to CSV file
+        String csvFile = "Melbnb.csv";
+
+        //Storing properties
+        List<List<String>> data = new ArrayList<>();
+        
+        try (Scanner scanner = new Scanner(new File(csvFile))) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+
+                // Split the line into values
+                String[] values = line.split(",");
+                List<String> lineData = Arrays.asList(values);
+
+                // Add line data to main list
+                data.add(lineData);
+
+            }
+
+            System.out.println("\nData read from CSV file:");
+            for (int i = 0; i < data.size(); i++) {
+                List<String> row = data.get(i);
+                System.out.println("Row " + i + ": " + String.join(", ", row));
+            }
+            
+        } catch (FileNotFoundException e) {
+            System.err.println("CSV file not found: " + e.getMessage());
+            e.printStackTrace();
         }
+
 
     }
 
