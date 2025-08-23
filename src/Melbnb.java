@@ -16,20 +16,25 @@ public class Melbnb {
 
     public Melbnb() {
         // Creating array list for properties
-        properties = new ArrayList<Property>();
         propertyDatabase = new PropertyDatabase();
 
     }
 
 
+    // Populate the database with properties from the CSV file
     public void populateDatabase(){
-        //Path to CSV file
-        String csvFile = "Melbnb.csv";
+        // Path to CSV file
+        String csvFile = "src/Melbnb.csv";
 
-        //Storing properties
+        // Storing properties
         List<List<String>> data = new ArrayList<>();
         
         try (Scanner scanner = new Scanner(new File(csvFile))) {
+
+            // Removes the header line
+            if (scanner.hasNextLine()) {
+            scanner.nextLine();
+        }
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
 
@@ -42,15 +47,31 @@ public class Melbnb {
 
             }
 
-            System.out.println("\nData read from CSV file:");
+            //Add properties into propertyDatabase
             for (int i = 0; i < data.size(); i++) {
                 List<String> row = data.get(i);
-                System.out.println("Row " + i + ": " + String.join(", ", row));
+                //Creating the properties
+                Property property = new Property(
+                    row.get(0), 
+                    row.get(1), 
+                    row.get(2), 
+                    row.get(3),
+                    row.get(4),
+                    Integer.parseInt(row.get(5)), 
+                    Double.parseDouble(row.get(6)),
+                    Double.parseDouble(row.get(7)), 
+                    Double.parseDouble(row.get(8)),
+                    Double.parseDouble(row.get(9)), 
+                    Double.parseDouble(row.get(10))
+                );
+                propertyDatabase.addProperty(property);
             }
-            
+
+
+
+
         } catch (FileNotFoundException e) {
             System.err.println("CSV file not found: " + e.getMessage());
-            e.printStackTrace();
         }
 
 
