@@ -23,7 +23,8 @@ public List<Property> search(String keyword) {
     List<Property> results = new ArrayList<>();
     for (Property property : properties) {
         if (property.getLocation().toLowerCase().contains(keyword.toLowerCase()) ||
-            String.valueOf(property.getRating()).toLowerCase().contains(keyword.toLowerCase())) {
+            String.valueOf(property.getRating()).toLowerCase().contains(keyword.toLowerCase()) ||
+            property.getType().toLowerCase().contains(keyword.toLowerCase())) {
             results.add(property);
         }
     }
