@@ -25,7 +25,6 @@ public List<Property> search(String keyword) {
         if (property.getLocation().toLowerCase().contains(keyword.toLowerCase()) ||
             String.valueOf(property.getRating()).toLowerCase().contains(keyword.toLowerCase())) {
             results.add(property);
-            System.out.println("Found property: " + property.getLocation());
         }
     }
     return results;
