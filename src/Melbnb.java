@@ -147,17 +147,17 @@ public class Melbnb {
                 int type = input.nextInt();
                 switch (type) {
                     case 1:
-                        // Private room
+                        bookingCreation("Private room");
                        
                         break;
 
                     case 2:
-                        // Entire place
+                        bookingCreation("Entire place");
                         
                         break;
 
                     case 3:
-                        // Shared room
+                        bookingCreation("Shared room");
                         
                         break;
 
