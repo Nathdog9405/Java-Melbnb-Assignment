@@ -111,7 +111,7 @@ public class Melbnb {
                         //Filter by rating
                         System.out.print("Please provide a minimum rating: ");
                         double minRating = input.nextDouble();
-                        // Implement filter logic here
+                        bookingCreation(Double.toString(minRating));
                         break;
 
                     case 4:
