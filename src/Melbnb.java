@@ -78,6 +78,8 @@ public class Melbnb {
         Scanner input = new Scanner(System.in);
         while (active) {
             System.out.println("""
+
+                    ------------------------
                     Welcome to Melbnb!
                     ------------------------
                     1: Search by location
@@ -96,12 +98,8 @@ public class Melbnb {
                         System.out.print("Please provide a location: ");
                         String location = input.nextLine();
 
-                        try{
-                            propertyDatabase.search(location);
+                        bookingCreation(location);
                             
-                        } catch (Exception e) {
-                            System.out.println("Error occurred while searching: " + e.getMessage());
-                        }
                         break;
 
                     case 2:
@@ -178,4 +176,44 @@ public class Melbnb {
         }
     }
 
+    // Searches the property database based on the keyword
+    public void bookingCreation(String prompt){
+        List<Property> searchResults = new ArrayList<>();
+        Scanner choice = new Scanner(System.in);
+        boolean selecting = true;
+        // Add search results to the list
+        searchResults.addAll(propertyDatabase.search(prompt));
+        while(selecting){
+        if (searchResults.isEmpty()) {
+            System.out.println("No properties found matching the criteria.");
+            selecting = false;
+        } else {
+            
+            System.out.println("""
+                ------------------------
+                Select from list:
+                ------------------------
+                """);
+            for (Property property : searchResults) {
+                System.out.println(searchResults.indexOf(property) + 1 + ": " + property.getProperty());
+            }
+            System.out.println(searchResults.size() + 1 + ": Go to main menu");
+            System.out.print("Choose an option: ");
+            int selection = choice.nextInt();
+            if (selection == searchResults.size() + 1) {
+                selecting = false;
+            } else if (selection > 0 && selection <= searchResults.size()) {
+                Property selectedProperty = searchResults.get(selection - 1);
+                System.out.println("You have selected: " + selectedProperty.getProperty());
+                System.out.println("Booking confirmed! Enjoy your stay at " + selectedProperty.getProperty() + ".");
+                selecting = false;
+            } else {
+                System.out.println("Invalid option. Please try again.");
+
+
+        }
+    }
+    }
+
+}
 }
