@@ -3,12 +3,10 @@ import java.util.*;
 public class PropertyDatabase implements Searchable<Property> {
 // Add necessary attributes
 private List<Property> properties;
-private Property property;
 
 // Constructor
    public PropertyDatabase() {
         this.properties = new ArrayList<>();
-        this.property = new Property();
    }
 
 // necessary methods
