@@ -35,52 +35,6 @@ public class Property implements Serializable{
         this.weeklyDiscount = weeklyDiscount;
     }
 
-
-    //Setters
-    public void setProperty(String property) {
-        this.property = property;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public void setMaxGuests(int maxGuests) {
-        this.maxGuests = maxGuests;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public void setPricePerNight(double pricePerNight) {
-        this.pricePerNight = pricePerNight;
-    }
-
-    public void setServiceFee(double serviceFee) {
-        this.serviceFee = serviceFee;
-    }
-
-    public void setCleaningFee(double cleaningFee) {
-        this.cleaningFee = cleaningFee;
-    }
-
-    public void setWeeklyDiscount(double weeklyDiscount) {
-        this.weeklyDiscount = weeklyDiscount;
-    }
-
     //Getters
     public String getProperty() {
         return property;

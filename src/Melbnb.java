@@ -4,15 +4,12 @@ import java.util.*;
 public class Melbnb {
 
     //Attributes
-    private PropertyDatabase propertyDatabase;
+    private final PropertyDatabase propertyDatabase;
     
-
     public Melbnb() {
         // Creating array list for properties
         propertyDatabase = new PropertyDatabase();
-
     }
-
 
     // Populate the database with properties from the CSV file
     public void populateDatabase(){
@@ -38,7 +35,6 @@ public class Melbnb {
 
                 // Add line data to main list
                 data.add(lineData);
-
             }
 
             //Add properties into propertyDatabase
@@ -60,17 +56,10 @@ public class Melbnb {
                 );
                 propertyDatabase.addProperty(property);
             }
-
-
-
-
         } catch (FileNotFoundException e) {
             System.err.println("CSV file not found: " + e.getMessage());
         }
-
-
     }
-
 
     //Runs the application
     public void run() {
@@ -93,33 +82,24 @@ public class Melbnb {
                 int option = input.nextInt();
                 input.nextLine(); 
                 switch (option) {
-                    case 1:
+                    case 1 -> {
                         // Search by location
                         System.out.print("Please provide a location: ");
                         String location = input.nextLine();
-
                         bookingCreation(location);
-                            
-                        break;
+                    }
 
-                    case 2:
-                        // Browse by type of place
-                        browsePlace();
-                        break;
-
-                    case 3:
+                    case 2 -> browsePlace();
+                    case 3 -> {
                         //Filter by rating
                         System.out.print("Please provide a minimum rating: ");
                         double minRating = input.nextDouble();
                         bookingCreation(Double.toString(minRating));
-                        break;
+                    }
 
-                    case 4:
-                        active = false;
-                        break;
+                    case 4 -> active = false;
 
-                    default:
-                        System.out.println("Invalid option. Please try again.");
+                    default -> System.out.println("Invalid option. Please try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
@@ -146,28 +126,16 @@ public class Melbnb {
             try {
                 int type = input.nextInt();
                 switch (type) {
-                    case 1:
-                        bookingCreation("Private room");
-                       
-                        break;
+                    case 1 -> bookingCreation("Private room");
 
-                    case 2:
-                        bookingCreation("Entire place");
-                        
-                        break;
+                    case 2 -> bookingCreation("Entire place");
 
-                    case 3:
-                        bookingCreation("Shared room");
-                        
-                        break;
+                    case 3 -> bookingCreation("Shared room");
 
-                    case 4:
-                        // Return to main menu
+                    case 4 -> // Return to main menu
                         browsing = false;
-                        break;
 
-                    default:
-                        System.out.println("Invalid option. Please try again.");
+                    default -> System.out.println("Invalid option. Please try again.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
