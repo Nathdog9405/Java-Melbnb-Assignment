@@ -2,7 +2,7 @@ import java.util.*;
 
 public class PropertyDatabase implements Searchable<Property> {
 // Add necessary attributes
-private List<Property> properties;
+private final List<Property> properties;
 
 // Constructor
    public PropertyDatabase() {
@@ -16,6 +16,7 @@ public void addProperty(Property property) {
     }
 
 
+@Override
 public List<Property> search(String keyword) {
     // Search properties by location or rating
     List<Property> results = new ArrayList<>();
