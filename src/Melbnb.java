@@ -1,6 +1,9 @@
 
 import java.io.*;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
+
 public class Melbnb {
 
     //Attributes
@@ -168,20 +171,61 @@ public class Melbnb {
             System.out.println(searchResults.size() + 1 + ": Go to main menu");
             System.out.print("Choose an option: ");
             int selection = choice.nextInt();
+
             if (selection == searchResults.size() + 1) {
                 selecting = false;
             } else if (selection > 0 && selection <= searchResults.size()) {
                 Property selectedProperty = searchResults.get(selection - 1);
-                System.out.println("You have selected: " + selectedProperty.getProperty());
-                System.out.println("Booking confirmed! Enjoy your stay at " + selectedProperty.getProperty() + ".");
+                LocalDate today = LocalDate.now();
+                LocalDate checkInDate;
+                LocalDate checkOutDate;
+                int totalDays;
+
+                // Get valid check-in date
+                while (true) {
+                    System.out.print("Enter check-in date (DD-MM-YYYY): ");
+                    String checkInStr = choice.next();
+                    try {
+                        checkInDate = LocalDate.parse(checkInStr, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        if (!checkInDate.isAfter(today)) {
+                            System.out.println("Check-in date must be after today.");
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid date format. Please try again.");
+                    }
+                }
+
+                // Get valid check-out date
+                while (true) {
+                    System.out.print("Enter check-out date (DD-MM-YYYY): ");
+                    String checkOutStr = choice.next();
+                    try {
+                        checkOutDate = LocalDate.parse(checkOutStr, java.time.format.DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+                        if (!checkOutDate.isAfter(checkInDate)) {
+                            System.out.println("Check-out date must be after check-in date.");
+                        } else {
+                            break;
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Invalid date format. Please try again.");
+                    }
+                }
+
+                totalDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+                System.out.println("Booking created successfully:");
+                System.out.println("Property: " + selectedProperty.getProperty());
+                System.out.println("Check-in Date: " + checkInDate);
+                System.out.println("Check-out Date: " + checkOutDate);
+                System.out.println("Total Days: " + totalDays);
+                }
+
                 selecting = false;
-            } else {
-                System.out.println("Invalid option. Please try again.");
-
-
+            } 
         }
     }
     }
 
-}
-}
+
+
