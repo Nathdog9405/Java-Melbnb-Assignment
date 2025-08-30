@@ -102,7 +102,7 @@ public class BookingManager {
                     System.out.printf("%-22s %s%n", "Location:", selectedProperty.getLocation());
                     System.out.printf("%-22s %.2f%n", "Rating:", selectedProperty.getRating());
                     System.out.printf("%-22s %s%n", "Description:", selectedProperty.getDescription());
-                    System.out.printf("%-22s %d%n", "Number of guests:", 1);
+                    System.out.printf("%-22s %d%n", "Max number of guests:", 1);
                     System.out.printf("%-22s $%.2f ($%.2f * %d night(s))%n", "Price:", price, selectedProperty.getPricePerNight(), totalDays);
 
                     if (totalDays >= 7) {
