@@ -169,7 +169,7 @@ public class BookingManager {
                             System.out.println("Check-out date: " + checkOutDate);
                             System.out.printf("Total Payment: $%.2f%n", totalPrice);
                             System.out.println("Thank you for choosing Melbnb!");
-                            System.out.println("Please press <Enter> to continue...");
+                            System.out.println("Please press Enter to continue...");
                             choice.nextLine(); // Consume newline
                             choice.nextLine(); // Wait for user to press Enter
                         } else {
