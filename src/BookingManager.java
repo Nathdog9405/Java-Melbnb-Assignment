@@ -17,21 +17,34 @@ public class BookingManager {
         searchResults.addAll(propertyDatabase.search(prompt));
         while (selecting) {
             if (searchResults.isEmpty()) {
-                System.out.println("No properties found matching the criteria.");
-                selecting = false;
+            System.out.println("No properties found matching the criteria.");
+            selecting = false;
             } else {
-                System.out.println("""
-                ------------------------
-                Select from list:
-                ------------------------
-                """);
-                for (Property property : searchResults) {
-                    System.out.println(searchResults.indexOf(property) + 1 + ": " + property.getProperty());
-                }
-                System.out.println(searchResults.size() + 1 + ": Go to main menu");
-                System.out.print("Choose an option: ");
-                int selection = choice.nextInt();
+            System.out.println("""
+            ------------------------
+            Select from list:
+            ------------------------
+            """);
+            for (int i = 0; i < searchResults.size(); i++) {
+                System.out.println((i + 1) + ": " + searchResults.get(i).getProperty());
+            }
+            System.out.println((searchResults.size() + 1) + ": Go to main menu");
+            int selection;
 
+            while (true) {
+                System.out.print("Choose an option: ");
+                if (choice.hasNextInt()) {
+                selection = choice.nextInt();
+                if (selection >= 1 && selection <= searchResults.size() + 1) {
+                    break;
+                } else {
+                    System.out.println("Invalid option. Please select a valid number from the list.");
+                }
+                } else {
+                System.out.println("Invalid input. Please enter a number.");
+                choice.next(); // Clear invalid input
+                }
+            }
                 if (selection == searchResults.size() + 1) {
                     selecting = false;
                 } else if (selection > 0 && selection <= searchResults.size()) {
