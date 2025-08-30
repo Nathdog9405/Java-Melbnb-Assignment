@@ -105,6 +105,8 @@ public class BookingManager {
         double totalPrice;
         // Show Property Details
         System.out.println("------------------------------------------------------------");
+        System.out.println("Show Property Details");
+        System.out.println("------------------------------------------------------------");
         System.out.printf("%-22s %s%n", "Property:", selectedProperty.getProperty());
         System.out.printf("%-22s %s%n", "", "hosted by " + selectedProperty.getHost());
         System.out.printf("%-22s %s%n", "Type of place:", selectedProperty.getType());
