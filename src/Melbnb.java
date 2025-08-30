@@ -1,10 +1,8 @@
-
 import java.io.*;
 import java.util.*;
 
-
 public class Melbnb {
-    //Attributes
+    // Attributes
     private final PropertyDatabase propertyDatabase;
     private final BookingManager bookingManager;
 
@@ -14,20 +12,20 @@ public class Melbnb {
     }
 
     // Populate the database with properties from the CSV file
-    public void populateDatabase(){
+    public void populateDatabase() {
         // Path to CSV file
         String csvFile = "src/Melbnb.csv";
 
         // Storing properties
         List<List<String>> data = new ArrayList<>();
-        
+
         // Using scanner to read csv file
         try (Scanner scanner = new Scanner(new File(csvFile))) {
 
             // Removes the header line
             if (scanner.hasNextLine()) {
-            scanner.nextLine();
-        }
+                scanner.nextLine();
+            }
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
 
@@ -39,21 +37,21 @@ public class Melbnb {
                 data.add(lineData);
             }
 
-            //Add properties into propertyDatabase
+            // Add properties into propertyDatabase
             for (int i = 0; i < data.size(); i++) {
                 List<String> row = data.get(i);
-                //Creating the properties
+                // Creating the properties
                 Property property = new Property(
-                    row.get(0), 
-                    row.get(1), 
-                    row.get(2), 
+                    row.get(0),
+                    row.get(1),
+                    row.get(2),
                     row.get(3),
                     row.get(4),
-                    Integer.parseInt(row.get(5)), 
+                    Integer.parseInt(row.get(5)),
                     Double.parseDouble(row.get(6)),
-                    Double.parseDouble(row.get(7)), 
+                    Double.parseDouble(row.get(7)),
                     Double.parseDouble(row.get(8)),
-                    Double.parseDouble(row.get(9)), 
+                    Double.parseDouble(row.get(9)),
                     Double.parseDouble(row.get(10))
                 );
                 propertyDatabase.addProperty(property);
@@ -63,7 +61,7 @@ public class Melbnb {
         }
     }
 
-    //Runs the application
+    // Runs the application
     public void run() {
         boolean active = true;
         Scanner input = new Scanner(System.in);
@@ -81,7 +79,7 @@ public class Melbnb {
 
             try {
                 int option = input.nextInt();
-                input.nextLine(); 
+                input.nextLine();
                 switch (option) {
                     case 1 -> {
                         // Search by location
@@ -89,11 +87,9 @@ public class Melbnb {
                         String location = input.nextLine();
                         bookingManager.propertySelection(location);
                     }
-
                     case 2 -> browsePlace();
-
                     case 3 -> {
-                        //Filter by rating
+                        // Filter by rating
                         System.out.print("Please provide a minimum rating: ");
                         double minRating = input.nextDouble();
                         while (true) {
@@ -105,18 +101,14 @@ public class Melbnb {
                                 } else {
                                     System.out.println("Invalid input. Please enter a number.");
                                     input.next(); // clear invalid input
-
                                 }
                             } else {
                                 bookingManager.propertySelection(Double.toString(minRating));
                                 break;
                             }
                         }
-                        
                     }
-
                     case 4 -> active = false;
-
                     default -> System.out.println("Invalid option. Please try again.");
                 }
             } catch (InputMismatchException e) {
@@ -124,8 +116,9 @@ public class Melbnb {
                 input.nextLine(); // Clears the invalid input
             }
         }
-        input.close(); 
+        input.close();
     }
+
     // Browse by type of place
     public void browsePlace() {
         boolean browsing = true;
@@ -167,6 +160,3 @@ public class Melbnb {
         }
     }
 }
-
-
-

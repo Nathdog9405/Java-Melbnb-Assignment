@@ -1,9 +1,8 @@
 import java.io.*;
 
-public class Property implements Serializable{
+public class Property implements Serializable {
 
     // Attributes
-
     private String property;
     private String location;
     private String description;
@@ -17,11 +16,21 @@ public class Property implements Serializable{
     private double weeklyDiscount;
 
     // Constructor
+    public Property() {}
 
-    public Property(){}
-
-    public Property (String property, String location, String description, String type, String host, int maxGuests, 
-    double rating, double pricePerNight, double serviceFee, double cleaningFee, double weeklyDiscount) {
+    public Property(
+        String property,
+        String location,
+        String description,
+        String type,
+        String host,
+        int maxGuests,
+        double rating,
+        double pricePerNight,
+        double serviceFee,
+        double cleaningFee,
+        double weeklyDiscount
+    ) {
         this.property = property;
         this.location = location;
         this.description = description;
