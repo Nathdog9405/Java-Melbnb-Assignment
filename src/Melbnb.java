@@ -96,7 +96,23 @@ public class Melbnb {
                         //Filter by rating
                         System.out.print("Please provide a minimum rating: ");
                         double minRating = input.nextDouble();
-                        bookingManager.bookingCreation(Double.toString(minRating));
+                        while (true) {
+                            if (minRating < 0 || minRating > 5) {
+                                System.out.println("Invalid rating. Please enter a rating between 0 and 5.");
+                                System.out.print("Please provide a minimum rating: ");
+                                if (input.hasNextDouble()) {
+                                    minRating = input.nextDouble();
+                                } else {
+                                    System.out.println("Invalid input. Please enter a number.");
+                                    input.next(); // clear invalid input
+
+                                }
+                            } else {
+                                bookingManager.bookingCreation(Double.toString(minRating));
+                                break;
+                            }
+                        }
+                        
                     }
 
                     case 4 -> active = false;
