@@ -182,6 +182,9 @@ public class Melbnb {
                 int totalDays;
 
                 // Get valid check-in date
+                System.out.println("------------------------");
+                System.out.println("Provide Dates");
+                System.out.println("------------------------");
                 while (true) {
                     System.out.print("Enter check-in date (DD-MM-YYYY): ");
                     String checkInStr = choice.next();
@@ -214,6 +217,12 @@ public class Melbnb {
                 }
 
                 totalDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
+
+                System.out.println("Show Property Details");
+                System.out.println("Property: " + selectedProperty.getProperty());
+                System.out.println("Type of place: " + selectedProperty.getType());
+                System.out.println("Location: " + selectedProperty.getLocation());
+
                 System.out.println("Booking created successfully:");
                 System.out.println("Property: " + selectedProperty.getProperty());
                 System.out.println("Check-in Date: " + checkInDate);
