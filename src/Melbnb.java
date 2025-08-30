@@ -70,7 +70,6 @@ public class Melbnb {
         Scanner input = new Scanner(System.in);
         while (active) {
             System.out.println("""
-
                     ------------------------
                     Welcome to Melbnb!
                     ------------------------
@@ -93,6 +92,7 @@ public class Melbnb {
                     }
 
                     case 2 -> browsePlace();
+
                     case 3 -> {
                         //Filter by rating
                         System.out.print("Please provide a minimum rating: ");
@@ -221,17 +221,106 @@ public class Melbnb {
                 }
 
                 totalDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
-
+                double price = selectedProperty.getPricePerNight() * totalDays;
+                double serviceFee = selectedProperty.getServiceFee() * totalDays;
+                double totalPrice;
+                System.out.println("------------------------");
                 System.out.println("Show Property Details");
+                System.out.println("------------------------");
                 System.out.println("Property: " + selectedProperty.getProperty());
                 System.out.println("Type of place: " + selectedProperty.getType());
                 System.out.println("Location: " + selectedProperty.getLocation());
+                System.out.printf("Rating: %.2f%n", selectedProperty.getRating());
+                System.out.println("Description: " + selectedProperty.getDescription());
+                System.out.println("Max number of guests: " + selectedProperty.getMaxGuests());
+                System.out.printf("Price: $%.2f ($%.2f * %d night(s))%n", price, selectedProperty.getPricePerNight(), totalDays);
+                if (totalDays >= 7) {
+                    double discountPrice = selectedProperty.getPricePerNight() * (100 - selectedProperty.getWeeklyDiscount()) / 100; // Apply discount
+                    double totalDiscountPrice = discountPrice * totalDays;
+                    totalPrice = totalDiscountPrice + serviceFee + selectedProperty.getCleaningFee();
+                    System.out.printf("Discounted Price: $%.2f%n ($%.2f * %d night(s))%n" , totalDiscountPrice, discountPrice, totalDays);
+                    System.out.printf("Service Fee: $%.2f ($%.2f * %d night(s))%n", serviceFee, selectedProperty.getServiceFee(), totalDays);
+                    System.out.printf("Cleaning Fee: $%.2f%n", selectedProperty.getCleaningFee());
+                    System.out.printf("Total Price: $%.2f%n", totalPrice);
+                }
+                else{
+                    totalPrice = price + serviceFee + selectedProperty.getCleaningFee();
+                    System.out.printf("Service Fee: $%.2f ($%.2f * %d night(s))%n", serviceFee, selectedProperty.getServiceFee(), totalDays);
+                    System.out.printf("Cleaning Fee: $%.2f%n", selectedProperty.getCleaningFee());
+                    System.out.printf("Total Price: $%.2f%n", totalPrice);
+                }
 
-                System.out.println("Booking created successfully:");
-                System.out.println("Property: " + selectedProperty.getProperty());
-                System.out.println("Check-in Date: " + checkInDate);
-                System.out.println("Check-out Date: " + checkOutDate);
-                System.out.println("Total Days: " + totalDays);
+                String reserveChoice;
+                String paymentChoice;
+                while (true) {
+                    System.out.print("Would you like to reserve this property? (Y/N): ");
+                    reserveChoice = choice.next();
+                    if (reserveChoice.equalsIgnoreCase("Y") || reserveChoice.equalsIgnoreCase("N")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid input. Please enter 'Y' or 'N'.");
+                    }
+                }
+                if (reserveChoice.equalsIgnoreCase("Y")) {
+                    // Reserve the property
+                    System.out.println("------------------------");
+                    System.out.println("Provide Personal Details");
+                    System.out.println("------------------------");
+                    System.out.print("Please provide your given name: ");
+                    String fname = choice.next();
+                    System.out.print("Please provide your last name: ");
+                    String lname = choice.next();
+                    System.out.print("Please provide your email: ");
+                    String email = choice.next();
+                    int numGuests;
+                    while (true) {
+                        System.out.print("Please provide number of guests: ");
+                        try {
+                            numGuests = choice.nextInt();
+                            if (numGuests > 0 && numGuests <= selectedProperty.getMaxGuests()) {
+                                break;
+                            } else {
+                                System.out.println("The max amount of guests for the property is " + selectedProperty.getMaxGuests() + ". Please choose vaild number of guests.");
+                            }
+                        } catch (InputMismatchException e) {
+                            System.out.println("Invalid input. Please enter a valid number.");
+                            choice.nextLine(); // Clear invalid input
+                        }
+                    }
+                    while (true) {
+                    System.out.print("Confirm Payment (Y/N): ");
+                    paymentChoice = choice.next();
+                    if (paymentChoice.equalsIgnoreCase("Y") || paymentChoice.equalsIgnoreCase("N")) {
+                        break;
+                    } else {
+                        System.out.println("Invalid input. Please enter 'Y' or 'N'.");
+                    }
+                }
+                if (paymentChoice.equalsIgnoreCase("Y")) {
+                    System.out.println(
+                    """
+                    --------------------------------------------------------------------------------
+                        Congratulations! Your trip is booked. A receipt has been sent to your email.
+                        Details of your trip are shown below.
+                        Your host will contact you before your trip. Enjoy your stay!  
+                    -------------------------------------------------------------------------------- 
+                            """);
+                    System.out.println("Name: " + fname + " " + lname);
+                    System.out.println("Email: " + email);
+                    System.out.println("Your stay: " + selectedProperty.getProperty());
+                    System.out.println("Who's coming: " + numGuests + " guest(s)");
+                    System.out.println("Check-in date: " + checkInDate);
+                    System.out.println("Check-out date: " + checkOutDate);
+                    System.out.printf("Total Payment: $%.2f%n", totalPrice);
+                    System.out.println("Thank you for choosing Melbnb!");
+                    System.out.println("Please press <Enter> to continue...");
+                    choice.nextLine(); // Consume newline
+                    choice.nextLine(); // Wait for user to press Enter
+                } else {
+                    System.out.println("Payment cancelled, returning to Main Menu.");
+                }
+                } else {
+                    System.out.println("Reservation cancelled, returning to Main Menu.");
                 }
 
                 selecting = false;
@@ -239,6 +328,7 @@ public class Melbnb {
         }
     }
     }
+}
 
 
 
