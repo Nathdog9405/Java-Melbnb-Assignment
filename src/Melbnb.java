@@ -129,15 +129,19 @@ public class Melbnb {
             try {
                 int type = input.nextInt();
                 switch (type) {
-                    case 1 -> bookingCreation("Private room");
-
-                    case 2 -> bookingCreation("Entire place");
-
-                    case 3 -> bookingCreation("Shared room");
-
-                    case 4 -> // Return to main menu
+                    case 1 -> {
+                        bookingCreation("Private room");
                         browsing = false;
-
+                    }
+                    case 2 -> {
+                        bookingCreation("Entire place");
+                        browsing = false;
+                    }
+                    case 3 -> {
+                        bookingCreation("Shared room");
+                        browsing = false;
+                    }
+                    case 4 -> browsing = false; // Return to main menu
                     default -> System.out.println("Invalid option. Please try again.");
                 }
             } catch (InputMismatchException e) {

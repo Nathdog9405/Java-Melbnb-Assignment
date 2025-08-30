@@ -20,10 +20,20 @@ public void addProperty(Property property) {
 public List<Property> search(String keyword) {
     // Search properties by location or rating
     List<Property> results = new ArrayList<>();
+     
     for (Property property : properties) {
-        if (property.getLocation().toLowerCase().contains(keyword.toLowerCase()) ||
-            String.valueOf(property.getRating()).toLowerCase().contains(keyword.toLowerCase()) ||
-            property.getType().toLowerCase().contains(keyword.toLowerCase())) {
+        boolean matches = property.getLocation().toLowerCase().contains(keyword.toLowerCase())
+                || property.getType().toLowerCase().contains(keyword.toLowerCase());
+        // Check if keyword is a number for rating comparison
+        try {
+            double keywordAsDouble = Double.parseDouble(keyword);
+            if (property.getRating() > keywordAsDouble) {
+                matches = true;
+            }
+        } catch (NumberFormatException e) {
+            // Ignore, keyword is not a number
+        }
+        if (matches) {
             results.add(property);
         }
     }
