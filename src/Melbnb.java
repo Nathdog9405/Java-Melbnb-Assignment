@@ -132,6 +132,7 @@ public class Melbnb {
         Scanner input = new Scanner(System.in);
         while (browsing) {
             System.out.println("""
+                    ------------------------
                     Browse by type of place
                     ------------------------
                     1) Private room
