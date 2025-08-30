@@ -87,7 +87,7 @@ public class Melbnb {
                         // Search by location
                         System.out.print("Please provide a location: ");
                         String location = input.nextLine();
-                        bookingManager.bookingCreation(location);
+                        bookingManager.propertySelection(location);
                     }
 
                     case 2 -> browsePlace();
@@ -108,7 +108,7 @@ public class Melbnb {
 
                                 }
                             } else {
-                                bookingManager.bookingCreation(Double.toString(minRating));
+                                bookingManager.propertySelection(Double.toString(minRating));
                                 break;
                             }
                         }
@@ -146,15 +146,15 @@ public class Melbnb {
                 int type = input.nextInt();
                 switch (type) {
                     case 1 -> {
-                        bookingManager.bookingCreation("Private room");
+                        bookingManager.propertySelection("Private room");
                         browsing = false;
                     }
                     case 2 -> {
-                        bookingManager.bookingCreation("Entire place");
+                        bookingManager.propertySelection("Entire place");
                         browsing = false;
                     }
                     case 3 -> {
-                        bookingManager.bookingCreation("Shared room");
+                        bookingManager.propertySelection("Shared room");
                         browsing = false;
                     }
                     case 4 -> browsing = false; // Return to main menu
