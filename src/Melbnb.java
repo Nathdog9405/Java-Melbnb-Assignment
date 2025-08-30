@@ -126,7 +126,7 @@ public class Melbnb {
         }
         input.close(); 
     }
-
+    // Browse by type of place
     public void browsePlace() {
         boolean browsing = true;
         Scanner input = new Scanner(System.in);

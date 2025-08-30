@@ -9,7 +9,7 @@ public PropertyDatabase() {
     this.properties = new ArrayList<>();
    }
 
-// necessary methods
+// Necessary methods
 public void addProperty(Property property) {
         properties.add(property);
     }
@@ -27,7 +27,7 @@ public List<Property> search(String keyword) {
                 matches = true;
             }
         } catch (NumberFormatException e) {
-            // Ignore, keyword is not a number
+            // Ignores if keyword is not a number
         }
         if (matches) {
             results.add(property);

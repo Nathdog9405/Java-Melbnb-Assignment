@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Property implements Serializable{
 
-    //Attributes
+    // Attributes
 
     private String property;
     private String location;
@@ -16,7 +16,7 @@ public class Property implements Serializable{
     private double cleaningFee;
     private double weeklyDiscount;
 
-    //Constructor
+    // Constructor
 
     public Property(){}
 
@@ -35,7 +35,7 @@ public class Property implements Serializable{
         this.weeklyDiscount = weeklyDiscount;
     }
 
-    //Getters
+    // Getters
     public String getProperty() {
         return property;
     }
