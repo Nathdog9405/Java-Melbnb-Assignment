@@ -35,6 +35,7 @@ public class BookingManager {
                 if (selection == searchResults.size() + 1) {
                     selecting = false;
                 } else if (selection > 0 && selection <= searchResults.size()) {
+                    // Gets the property selected
                     Property selectedProperty = searchResults.get(selection - 1);
                     LocalDate today = LocalDate.now();
                     LocalDate checkInDate;
@@ -75,35 +76,35 @@ public class BookingManager {
                             System.out.println("Invalid date format. Please try again.");
                         }
                     }
-
+                    // Calculate total price
                     totalDays = (int) ChronoUnit.DAYS.between(checkInDate, checkOutDate);
                     double price = selectedProperty.getPricePerNight() * totalDays;
                     double serviceFee = selectedProperty.getServiceFee() * totalDays;
                     double totalPrice;
-                    System.out.println("------------------------");
-                    System.out.println("Show Property Details");
-                    System.out.println("------------------------");
-                    System.out.println("Property: " + selectedProperty.getProperty());
-                    System.out.println("Type of place: " + selectedProperty.getType());
-                    System.out.println("Location: " + selectedProperty.getLocation());
-                    System.out.printf("Rating: %.2f%n", selectedProperty.getRating());
-                    System.out.println("Description: " + selectedProperty.getDescription());
-                    System.out.println("Max number of guests: " + selectedProperty.getMaxGuests());
-                    System.out.printf("Price: $%.2f ($%.2f * %d night(s))%n", price, selectedProperty.getPricePerNight(), totalDays);
-                    
+                    // Show Property Details
+                    System.out.println("------------------------------------------------------------");
+                    System.out.printf("%-22s %s%n", "Property:", selectedProperty.getProperty());
+                    System.out.printf("%-22s %s%n", "", "hosted by " + selectedProperty.getHost());
+                    System.out.printf("%-22s %s%n", "Type of place:", selectedProperty.getType());
+                    System.out.printf("%-22s %s%n", "Location:", selectedProperty.getLocation());
+                    System.out.printf("%-22s %.2f%n", "Rating:", selectedProperty.getRating());
+                    System.out.printf("%-22s %s%n", "Description:", selectedProperty.getDescription());
+                    System.out.printf("%-22s %d%n", "Number of guests:", 1);
+                    System.out.printf("%-22s $%.2f ($%.2f * %d night(s))%n", "Price:", price, selectedProperty.getPricePerNight(), totalDays);
+
                     if (totalDays >= 7) {
-                        double discountPrice = selectedProperty.getPricePerNight() * (100 - selectedProperty.getWeeklyDiscount()) / 100; // Apply discount
+                        double discountPrice = selectedProperty.getPricePerNight() * (100 - selectedProperty.getWeeklyDiscount()) / 100.0;
                         double totalDiscountPrice = discountPrice * totalDays;
                         totalPrice = totalDiscountPrice + serviceFee + selectedProperty.getCleaningFee();
-                        System.out.printf("Discounted Price: $%.2f%n ($%.2f * %d night(s))%n", totalDiscountPrice, discountPrice, totalDays);
-                        System.out.printf("Service Fee: $%.2f ($%.2f * %d night(s))%n", serviceFee, selectedProperty.getServiceFee(), totalDays);
-                        System.out.printf("Cleaning Fee: $%.2f%n", selectedProperty.getCleaningFee());
-                        System.out.printf("Total Price: $%.2f%n", totalPrice);
+                        System.out.printf("%-22s $%.2f ($%.2f * %d night(s))%n", "Discounted Price:", totalDiscountPrice, discountPrice, totalDays);
+                        System.out.printf("%-22s $%.2f ($%.2f * %d night(s))%n", "Service Fee:", serviceFee, selectedProperty.getServiceFee(), totalDays);
+                        System.out.printf("%-22s $%.2f%n", "Cleaning Fee:", selectedProperty.getCleaningFee());
+                        System.out.printf("%-22s $%.2f%n", "Total Price:", totalPrice);
                     } else {
                         totalPrice = price + serviceFee + selectedProperty.getCleaningFee();
-                        System.out.printf("Service Fee: $%.2f ($%.2f * %d night(s))%n", serviceFee, selectedProperty.getServiceFee(), totalDays);
-                        System.out.printf("Cleaning Fee: $%.2f%n", selectedProperty.getCleaningFee());
-                        System.out.printf("Total Price: $%.2f%n", totalPrice);
+                        System.out.printf("%-22s $%.2f ($%.2f * %d night(s))%n", "Service Fee:", serviceFee, selectedProperty.getServiceFee(), totalDays);
+                        System.out.printf("%-22s $%.2f%n", "Cleaning Fee:", selectedProperty.getCleaningFee());
+                        System.out.printf("%-22s $%.2f%n", "Total Price:", totalPrice);
                     }
 
                     String reserveChoice;
@@ -117,8 +118,9 @@ public class BookingManager {
                             System.out.println("Invalid input. Please enter 'Y' or 'N'.");
                         }
                     }
+                    //Gets customer details
                     if (reserveChoice.equalsIgnoreCase("Y")) {
-                        // Reserve the property
+                        
                         System.out.println("------------------------");
                         System.out.println("Provide Personal Details");
                         System.out.println("------------------------");
@@ -133,6 +135,7 @@ public class BookingManager {
                             System.out.print("Please provide number of guests: ");
                             try {
                                 numGuests = choice.nextInt();
+                                // Makes sure there are no more guests than the property allows or at least 1 guest
                                 if (numGuests > 0 && numGuests <= selectedProperty.getMaxGuests()) {
                                     break;
                                 } else {
@@ -152,6 +155,7 @@ public class BookingManager {
                                 System.out.println("Invalid input. Please enter 'Y' or 'N'.");
                             }
                         }
+                        // Show confirmation message
                         if (paymentChoice.equalsIgnoreCase("Y")) {
                             System.out.println(
                                     """
@@ -161,16 +165,16 @@ public class BookingManager {
                         Your host will contact you before your trip. Enjoy your stay!  
                     -------------------------------------------------------------------------------- 
                             """);
-                            System.out.println("Name: " + fname + " " + lname);
-                            System.out.println("Email: " + email);
-                            System.out.println("Your stay: " + selectedProperty.getProperty());
-                            System.out.println("Who's coming: " + numGuests + " guest(s)");
-                            System.out.println("Check-in date: " + checkInDate);
-                            System.out.println("Check-out date: " + checkOutDate);
-                            System.out.printf("Total Payment: $%.2f%n", totalPrice);
+                            System.out.printf("%-22s %s %s%n", "Name", fname, lname);
+                            System.out.printf("%-22s %s%n", "Email:", email);
+                            System.out.printf("%-22s %s%n", "Your stay:", selectedProperty.getProperty());
+                            System.out.printf("%-22s %d guest(s)%n", "Who's coming:", numGuests);
+                            System.out.printf("%-22s %s%n", "Check-in date:", checkInDate);
+                            System.out.printf("%-22s %s%n", "Check-out date:", checkOutDate);
+                            System.out.printf("%-22s $%.2f%n", "Total Payment:", totalPrice);
                             System.out.println("Thank you for choosing Melbnb!");
                             System.out.println("Please press Enter to continue...");
-                            choice.nextLine(); // Consume newline
+                            choice.nextLine();
                             choice.nextLine(); // Wait for user to press Enter
                         } else {
                             System.out.println("Payment cancelled, returning to Main Menu.");
