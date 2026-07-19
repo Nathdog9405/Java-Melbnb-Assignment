@@ -1,18 +1,12 @@
-## Getting Started
+MelBnB is a Java-based accommodation booking system that allows users to browse, book, and manage places to stay. Inspired by Airbnb, the application provides a simple and user-friendly platform for guests to find accommodation.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+---
 
-## Folder Structure
+## 📖 Features
 
-The workspace contains two folders by default, where:
+- 🔍 Browse available accommodation listings
+- 🏡 View property details
+- 📅 Book available properties
+- ❌ Cancel existing bookings
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
-
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
-
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
-
-## Dependency Management
-
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+---
